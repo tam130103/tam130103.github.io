@@ -1,28 +1,22 @@
-/**
- * MonoCV — Elite Portfolio Interactions
- * Orchestrated animations and state management
- */
-
 document.addEventListener('DOMContentLoaded', () => {
   initRevealAnimations();
+  initExperienceToggles();
+  initContactForm();
 });
 
-/**
- * Initialize staged reveal animations using IntersectionObserver
- */
 function initRevealAnimations() {
   const options = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+    threshold: 0.08,
+    rootMargin: '0px 0px -40px 0px'
   };
 
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, index) => {
+    entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        // Add a slight stagger effect based on element index or delay
+        const delay = Math.random() * 200 + 50;
         setTimeout(() => {
           entry.target.classList.add('visible');
-        }, index * 100); 
+        }, delay);
         observer.unobserve(entry.target);
       }
     });
@@ -31,54 +25,70 @@ function initRevealAnimations() {
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 }
 
-/**
- * Toggle experience detail visibility with smooth state transition
- */
-function toggleExpand(el) {
-  const details = el.nextElementSibling;
-  if (!details || !details.classList.contains('experience-details')) return;
+function initExperienceToggles() {
+  document.querySelectorAll('[data-expand]').forEach((item) => {
+    item.addEventListener('click', () => {
+      const targetId = item.dataset.expand;
+      const details = document.getElementById(targetId);
+      if (!details) return;
 
-  const isExpanding = details.style.display !== 'block';
-  
-  if (isExpanding) {
-    details.style.display = 'block';
-    // Small delay to allow display:block to take effect before opacity/height change
-    requestAnimationFrame(() => {
-      el.classList.add('expanded');
+      const isExpanding = details.style.display !== 'block';
+
+      if (isExpanding) {
+        details.style.display = 'block';
+        requestAnimationFrame(() => {
+          item.classList.add('expanded');
+        });
+      } else {
+        item.classList.remove('expanded');
+        details.style.display = 'none';
+      }
     });
-  } else {
-    el.classList.remove('expanded');
-    details.style.display = 'none';
-  }
+  });
 }
 
-/**
- * Handle contact form submission with feedback
- */
-function handleSubmit(e) {
-  e.preventDefault();
-  const form = e.target;
-  const submitBtn = form.querySelector('.btn-submit');
-  
-  const name = document.getElementById('name').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const message = document.getElementById('message').value.trim();
+function initContactForm() {
+  const form = document.getElementById('contact-form');
+  if (!form) return;
 
-  if (!name || !email || !message) return;
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-  // Visual feedback
-  const originalText = submitBtn.textContent;
-  submitBtn.textContent = 'Sending...';
-  submitBtn.disabled = true;
+    const submitBtn = form.querySelector('.btn-submit');
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
 
-  setTimeout(() => {
+    if (!name || !email || !message) {
+      submitBtn.textContent = 'Please fill all fields';
+      submitBtn.disabled = true;
+      setTimeout(() => {
+        submitBtn.textContent = 'Send Message';
+        submitBtn.disabled = false;
+      }, 2000);
+      return;
+    }
+
+    if (!email.includes('@') || !email.includes('.')) {
+      submitBtn.textContent = 'Invalid email';
+      submitBtn.disabled = true;
+      setTimeout(() => {
+        submitBtn.textContent = 'Send Message';
+        submitBtn.disabled = false;
+      }, 2000);
+      return;
+    }
+
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Sending...';
+    submitBtn.disabled = true;
+
     window.location.href = `mailto:thetam2103@gmail.com?subject=${encodeURIComponent('Portfolio Contact: ' + name)}&body=${encodeURIComponent('From: ' + name + '\nEmail: ' + email + '\n\n' + message)}`;
-    
-    // Reset state
+
     submitBtn.textContent = 'Sent!';
     setTimeout(() => {
       submitBtn.textContent = originalText;
       submitBtn.disabled = false;
-    }, 2000);
-  }, 500);
+    }, 3000);
+  });
 }

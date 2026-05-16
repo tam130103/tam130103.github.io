@@ -6,21 +6,22 @@
   <title>Nguyen The Tam — Senior Full-stack Developer & Backend Architect</title>
   <meta name="description" content="Portfolio of Nguyen The Tam, a Senior Full-stack Developer specializing in Backend Architecture, AI Integration, and Scalable Systems.">
   <meta name="keywords" content="Full-stack Developer, Backend Engineer, Node.js, NestJS, AI Integration, System Architect, Vietnam">
-  
+
   <!-- Open Graph -->
   <meta property="og:title" content="Nguyen The Tam — Senior Full-stack Developer">
   <meta property="og:description" content="Expert in building scalable backend systems and high-performance web applications.">
   <meta property="og:type" content="website">
-  
+
   <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
 </head>
 <body>
 <div class="page-wrapper">
-  <!-- SIDEBAR (Section 4.2) -->
+  <!-- SIDEBAR -->
   <aside class="sidebar">
     <div class="profile-card">
-      <img src="assets/9e3e5350-83d4-4bc5-80c4-d550967e97b3.webp" alt="Nguyen The Tam" class="profile-avatar">
-      <p class="profile-greeting">Hello I'm</p>
+      <img src="assets/9e3e5350-83d4-4bc5-80c4-d550967e97b3.webp" alt="Nguyen The Tam" class="profile-avatar" loading="lazy">
+      <p class="profile-greeting">Hello, I'm</p>
       <h1 class="profile-name">Nguyen The Tam</h1>
       <p class="profile-title">Full-stack Developer, Backend Engineer & System Architect.</p>
       <div class="profile-status"><span class="status-dot"></span> Available for work</div>
@@ -29,7 +30,7 @@
         Hanoi, Vietnam
       </div>
     </div>
-    
+
     <div class="contact-card">
       <div class="contact-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
@@ -42,7 +43,7 @@
     </div>
 
     <div class="sidebar-buttons">
-      <a href="#" class="btn-primary">Download CV</a>
+      <a href="/Nguyen_The_Tam_CV.pdf" download class="btn-primary">Download CV</a>
     </div>
   </aside>
 
@@ -51,8 +52,8 @@
 
     <!-- ABOUT -->
     <section id="about" class="reveal">
-      <span class="section-label">ABOUT</span>
-      <div class="about-text">
+      <span class="section-label">About</span>
+      <div class="about-text" style="max-width:65ch">
         <p>I am Nguyen The Tam, a passionate Full-stack Developer based in Hanoi, Vietnam. My expertise lies at the intersection of backend engineering and scalable system architecture.</p>
         <p>With hands-on experience building high-performance APIs, real-time applications, and AI-integrated workflows, I've honed my skills in both back-end and front-end development. Currently completing my degree at Hanoi University of Mining and Geology.</p>
       </div>
@@ -60,7 +61,7 @@
 
     <!-- SKILLS -->
     <section id="skills" class="reveal">
-      <span class="section-label">SKILLS</span>
+      <span class="section-label">Skills</span>
       <div class="skills-list">
         <span class="skill-tag">Backend Development</span>
         <span class="skill-tag">API Design</span>
@@ -73,9 +74,9 @@
 
     <!-- EXPERIENCE -->
     <section id="experience" class="reveal">
-      <span class="section-label">EXPERIENCE</span>
+      <span class="section-label">Experience</span>
       <div class="experience-list">
-        <div class="experience-item" onclick="toggleExpand(this)">
+        <div class="experience-item" data-expand="exp1">
           <div class="experience-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="24" height="24"><path d="M3 9l2-2m0 0l7-7 7 7M5 7v12a2 2 0 002 2h10a2 2 0 002-2V7"/></svg></div>
           <div class="experience-info">
             <h2 class="experience-company">ESG TECH</h2>
@@ -85,10 +86,10 @@
         </div>
         <div class="experience-details" id="exp1">
           <ul>
-            <li class="text-body-small">Developed and optimized Node.js/Express APIs with measurable reliability improvements</li>
-            <li class="text-body-small">Built complex calculation engines for ESG metrics</li>
-            <li class="text-body-small">Streamlined data flow between services</li>
-            <li class="text-body-small">Contributed to code reviews and sprint planning</li>
+            <li>Developed and optimized Node.js/Express APIs with measurable reliability improvements</li>
+            <li>Built complex calculation engines for ESG metrics</li>
+            <li>Streamlined data flow between services</li>
+            <li>Contributed to code reviews and sprint planning</li>
           </ul>
         </div>
       </div>
@@ -96,27 +97,25 @@
 
     <!-- TECH STACK -->
     <section id="techstack" class="reveal">
-      <span class="section-label">TECH STACK</span>
+      <span class="section-label">Tech Stack</span>
       <div class="tech-icons">
-        <div class="tech-icon" title="Node.js"><img src="https://cdn.simpleicons.org/nodedotjs/339933" alt="Node.js"></div>
-        <div class="tech-icon" title="NestJS"><img src="https://cdn.simpleicons.org/nestjs/E0234E" alt="NestJS"></div>
-        <div class="tech-icon" title="React"><img src="https://cdn.simpleicons.org/react/61DAFB" alt="React"></div>
-        <div class="tech-icon" title=".NET"><img src="https://cdn.simpleicons.org/dotnet/512BD4" alt=".NET"></div>
-        <div class="tech-icon" title="PostgreSQL"><img src="https://cdn.simpleicons.org/postgresql/4169E1" alt="PostgreSQL"></div>
-        <div class="tech-icon" title="Docker"><img src="https://cdn.simpleicons.org/docker/2496ED" alt="Docker"></div>
-        <div class="tech-icon" title="TypeScript"><img src="https://cdn.simpleicons.org/typescript/3178C6" alt="TypeScript"></div>
+        <div class="tech-icon" title="Node.js"><img src="https://cdn.simpleicons.org/nodedotjs/339933" alt="Node.js" loading="lazy"></div>
+        <div class="tech-icon" title="NestJS"><img src="https://cdn.simpleicons.org/nestjs/E0234E" alt="NestJS" loading="lazy"></div>
+        <div class="tech-icon" title="React"><img src="https://cdn.simpleicons.org/react/61DAFB" alt="React" loading="lazy"></div>
+        <div class="tech-icon" title=".NET"><img src="https://cdn.simpleicons.org/dotnet/512BD4" alt=".NET" loading="lazy"></div>
+        <div class="tech-icon" title="PostgreSQL"><img src="https://cdn.simpleicons.org/postgresql/4169E1" alt="PostgreSQL" loading="lazy"></div>
+        <div class="tech-icon" title="Docker"><img src="https://cdn.simpleicons.org/docker/2496ED" alt="Docker" loading="lazy"></div>
+        <div class="tech-icon" title="TypeScript"><img src="https://cdn.simpleicons.org/typescript/3178C6" alt="TypeScript" loading="lazy"></div>
       </div>
     </section>
 
     <!-- PROJECTS -->
     <section id="projects" class="reveal">
-      <span class="section-label">PROJECTS</span>
+      <span class="section-label">Projects</span>
       <div class="projects-carousel">
         <div class="project-card">
-          <div class="project-card-image">
-            <div class="project-placeholder" style="background:linear-gradient(135deg,#e8ecf1,#d1dce8)">
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,.15)" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
-            </div>
+          <div class="project-card-image" style="background:linear-gradient(135deg,#f0f2f5,#e2e8f0)">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,0.12)" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
           </div>
           <div class="project-card-body">
             <h2 class="project-card-title">Edu-Social Platform</h2>
@@ -125,10 +124,8 @@
           </div>
         </div>
         <div class="project-card">
-          <div class="project-card-image">
-            <div class="project-placeholder" style="background:linear-gradient(135deg,#f0e8e8,#e8d1d1)">
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,.15)" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
-            </div>
+          <div class="project-card-image" style="background:linear-gradient(135deg,#f5f0f0,#ece0e0)">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,0.12)" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
           </div>
           <div class="project-card-body">
             <h2 class="project-card-title">Food Delivery Ecosystem</h2>
@@ -141,9 +138,9 @@
 
     <!-- EDUCATION -->
     <section id="education" class="reveal">
-      <span class="section-label">EDUCATION</span>
+      <span class="section-label">Education</span>
       <div class="experience-list">
-        <div class="experience-item">
+        <div class="experience-item" style="cursor:default">
           <div class="experience-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><path d="M12 14l9-5-9-5-9 5 9 5z"/><path d="M12 14l6.16-3.422a12 12 0 01.665 6.479A11.95 11.95 0 0012 20.055a11.95 11.95 0 00-6.824-2.998 12 12 0 01.665-6.479L12 14z"/></svg>
           </div>
@@ -158,7 +155,7 @@
 
     <!-- LINKS -->
     <section id="links" class="reveal">
-      <span class="section-label">CONNECT</span>
+      <span class="section-label">Connect</span>
       <div class="links-grid">
         <a href="https://github.com/tam130103" target="_blank" class="link-item">GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
         <a href="https://www.linkedin.com/in/nguyenthetam/" target="_blank" class="link-item">LinkedIn <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
@@ -168,18 +165,18 @@
 
     <!-- CONTACT -->
     <section id="contact" class="reveal">
-      <span class="section-label">CONTACT ME</span>
-      <form class="contact-form" onsubmit="handleSubmit(event)">
+      <span class="section-label">Contact Me</span>
+      <form class="contact-form" id="contact-form">
         <div class="form-group">
-          <label class="text-h3" for="name">Name</label>
-          <input type="text" id="name" class="form-input" placeholder="Your Name" required>
+          <label for="name">Name</label>
+          <input type="text" id="name" class="form-input" placeholder="Your Name" required autocomplete="name">
         </div>
         <div class="form-group">
-          <label class="text-h3" for="email">Email</label>
-          <input type="email" id="email" class="form-input" placeholder="your@email.com" required>
+          <label for="email">Email</label>
+          <input type="email" id="email" class="form-input" placeholder="your@email.com" required autocomplete="email">
         </div>
         <div class="form-group">
-          <label class="text-h3" for="message">Message</label>
+          <label for="message">Message</label>
           <textarea id="message" class="form-textarea" placeholder="How can I help you?" required></textarea>
         </div>
         <button type="submit" class="btn-submit">Send Message</button>
@@ -191,11 +188,11 @@
 
 <footer class="footer">
   <div class="footer-content">
-    <span class="footer-text">&copy; 2026 Nguyen The Tam. Senior Full-stack Developer.</span>
-    <span class="footer-right">Crafted with precision.</span>
+    <span>&copy; 2026 Nguyen The Tam. Senior Full-stack Developer.</span>
+    <span>Crafted with precision.</span>
   </div>
 </footer>
 
-<script src="script.js"></script>
+<script src="script.js" type="module"></script>
 </body>
 </html>
