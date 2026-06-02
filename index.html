@@ -12,186 +12,271 @@
   <meta property="og:description" content="Expert in building scalable backend systems and high-performance web applications.">
   <meta property="og:type" content="website">
 
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,600,700&display=swap">
+
+  <!-- GSAP -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js" defer></script>
+
   <link rel="stylesheet" href="styles.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>T</text></svg>">
 </head>
 <body>
-<div class="page-wrapper">
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <div class="profile-card">
-      <img src="assets/9e3e5350-83d4-4bc5-80c4-d550967e97b3.webp" alt="Nguyen The Tam" class="profile-avatar" loading="lazy">
-      <p class="profile-greeting">Hello, I'm</p>
-      <h1 class="profile-name">Nguyen The Tam</h1>
-      <p class="profile-title">Full-stack Developer, Backend Engineer & System Architect.</p>
-      <div class="profile-status"><span class="status-dot"></span> Available for work</div>
-      <div class="profile-location">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        Hanoi, Vietnam
+<main class="page-root" id="page-root">
+
+  <!-- NAVIGATION -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">tam.</a>
+      <div class="nav-links">
+        <a href="#about" class="nav-link">About</a>
+        <a href="#skills" class="nav-link">Skills</a>
+        <a href="#experience" class="nav-link">Work</a>
+        <a href="#projects" class="nav-link">Projects</a>
+      </div>
+      <a href="#contact" class="nav-cta">Get in touch</a>
+    </div>
+  </nav>
+
+  <!-- HERO (ATTENTION) -->
+  <section class="hero" id="hero">
+    <div class="hero-bg-wash"></div>
+    <div class="hero-content">
+      <div class="hero-text">
+        <p class="hero-greeting">Full-stack Developer & Backend Architect</p>
+        <h1 class="hero-h1">I architect scalable
+          <span class="hero-inline-img" style="background-image:url('https://picsum.photos/seed/code-arch/200/80')"></span>
+          systems & craft digital experiences</h1>
+        <p class="hero-sub">Based in Hanoi, Vietnam. Building high-performance APIs, real-time applications, and AI-integrated workflows.</p>
+        <div class="hero-ctas">
+          <a href="#contact" class="btn-hero-primary">Start a project</a>
+          <a href="/Nguyen_The_Tam_CV.pdf" download class="btn-hero-secondary">Download CV
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          </a>
+        </div>
+        <div class="hero-status"><span class="status-dot"></span> Available for work</div>
+      </div>
+      <div class="hero-image-col">
+        <div class="hero-image-wrap">
+          <img src="assets/9e3e5350-83d4-4bc5-80c4-d550967e97b3.webp" alt="Nguyen The Tam" class="hero-portrait" loading="eager">
+        </div>
       </div>
     </div>
+  </section>
 
-    <div class="contact-card">
-      <div class="contact-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
-        <a href="https://github.com/tam130103" target="_blank">github.com/tam130103</a>
-      </div>
-      <div class="contact-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7"/></svg>
-        <a href="mailto:thetam2103@gmail.com">thetam2103@gmail.com</a>
+  <!-- ABOUT (INTEREST) — Scrubbing Text Reveal -->
+  <section class="section section--about" id="about">
+    <div class="section-inner section-inner--wide">
+      <div class="about-reveal-block" id="about-text-reveal">
+        <p class="about-reveal-p">I am Nguyen The Tam, a passionate Full-stack Developer based in Hanoi, Vietnam. My expertise lies at the intersection of backend engineering and scalable system architecture. With hands-on experience building high-performance APIs, real-time applications, and AI-integrated workflows, I have honed my skills in both back-end and front-end development. Currently completing my degree at Hanoi University of Mining and Geology.</p>
       </div>
     </div>
+  </section>
 
-    <div class="sidebar-buttons">
-      <a href="/Nguyen_The_Tam_CV.pdf" download class="btn-primary">Download CV</a>
+  <!-- SKILLS BENTO GRID (INTEREST) -->
+  <section class="section section--skills" id="skills">
+    <div class="section-inner">
+      <h2 class="section-heading">What I do best</h2>
+      <div class="bento-grid" id="bento-grid">
+        <div class="bento-card bento-card--wide">
+          <div class="bento-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28"><path d="M4 17l6-6-6-6"/><path d="M12 19h8"/></svg>
+          </div>
+          <h3 class="bento-card-title">Backend Development</h3>
+          <p class="bento-card-text">Building robust server-side architectures with Node.js, NestJS, and .NET. Designing clean, maintainable APIs that scale.</p>
+        </div>
+        <div class="bento-card">
+          <div class="bento-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28"><circle cx="12" cy="12" r="3"/><path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          </div>
+          <h3 class="bento-card-title">API Design</h3>
+          <p class="bento-card-text">RESTful & GraphQL APIs with authentication, rate limiting, and real-time capabilities.</p>
+        </div>
+        <div class="bento-card">
+          <div class="bento-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <h3 class="bento-card-title">System Architecture</h3>
+          <p class="bento-card-text">Designing distributed systems with microservices, event-driven patterns, and clean architecture.</p>
+        </div>
+        <div class="bento-card">
+          <div class="bento-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <h3 class="bento-card-title">Real-time Systems</h3>
+          <p class="bento-card-text">WebSocket servers, live messaging, and event streaming for responsive applications.</p>
+        </div>
+        <div class="bento-card">
+          <div class="bento-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </div>
+          <h3 class="bento-card-title">Clean Architecture</h3>
+          <p class="bento-card-text">Applying SOLID principles, domain-driven design, and layered patterns for maintainable codebases.</p>
+        </div>
+        <div class="bento-card bento-card--accent">
+          <div class="bento-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28"><path d="M12 6V2H8"/><path d="M7 10V6h4"/><path d="M12 22v-4h4"/><path d="M17 14v4h-4"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <h3 class="bento-card-title">AI Integration</h3>
+          <p class="bento-card-text">Embedding LLMs and AI workflows into production systems.</p>
+        </div>
+      </div>
     </div>
-  </aside>
+  </section>
 
-  <!-- MAIN CONTENT -->
-  <main class="main-content">
-
-    <!-- ABOUT -->
-    <section id="about" class="reveal">
-      <span class="section-label">About</span>
-      <div class="about-text" style="max-width:65ch">
-        <p>I am Nguyen The Tam, a passionate Full-stack Developer based in Hanoi, Vietnam. My expertise lies at the intersection of backend engineering and scalable system architecture.</p>
-        <p>With hands-on experience building high-performance APIs, real-time applications, and AI-integrated workflows, I've honed my skills in both back-end and front-end development. Currently completing my degree at Hanoi University of Mining and Geology.</p>
-      </div>
-    </section>
-
-    <!-- SKILLS -->
-    <section id="skills" class="reveal">
-      <span class="section-label">Skills</span>
-      <div class="skills-list">
-        <span class="skill-tag">Backend Development</span>
-        <span class="skill-tag">API Design</span>
-        <span class="skill-tag">System Architecture</span>
-        <span class="skill-tag">Real-time Systems</span>
-        <span class="skill-tag">AI Integration</span>
-        <span class="skill-tag">Clean Architecture</span>
-      </div>
-    </section>
-
-    <!-- EXPERIENCE -->
-    <section id="experience" class="reveal">
-      <span class="section-label">Experience</span>
-      <div class="experience-list">
-        <div class="experience-item" data-expand="exp1">
-          <div class="experience-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="24" height="24"><path d="M3 9l2-2m0 0l7-7 7 7M5 7v12a2 2 0 002 2h10a2 2 0 002-2V7"/></svg></div>
-          <div class="experience-info">
-            <h2 class="experience-company">ESG TECH</h2>
-            <p class="experience-role">Backend Developer Intern</p>
-          </div>
-          <div class="experience-date">Nov 2025 - Apr 2026 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="chevron"><path d="m6 9 6 6 6-6"/></svg></div>
+  <!-- EXPERIENCE (DESIRE) — Scroll Pinned -->
+  <section class="section section--experience" id="experience">
+    <div class="section-inner">
+      <div class="exp-split" id="exp-split">
+        <div class="exp-left" id="exp-left">
+          <h2 class="section-heading">Work Experience</h2>
+          <p class="exp-left-sub">Building real products at real companies.</p>
         </div>
-        <div class="experience-details" id="exp1">
-          <ul>
-            <li>Developed and optimized Node.js/Express APIs with measurable reliability improvements</li>
-            <li>Built complex calculation engines for ESG metrics</li>
-            <li>Streamlined data flow between services</li>
-            <li>Contributed to code reviews and sprint planning</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- TECH STACK -->
-    <section id="techstack" class="reveal">
-      <span class="section-label">Tech Stack</span>
-      <div class="tech-icons">
-        <div class="tech-icon" title="Node.js"><img src="https://cdn.simpleicons.org/nodedotjs/339933" alt="Node.js" loading="lazy"></div>
-        <div class="tech-icon" title="NestJS"><img src="https://cdn.simpleicons.org/nestjs/E0234E" alt="NestJS" loading="lazy"></div>
-        <div class="tech-icon" title="React"><img src="https://cdn.simpleicons.org/react/61DAFB" alt="React" loading="lazy"></div>
-        <div class="tech-icon" title=".NET"><img src="https://cdn.simpleicons.org/dotnet/512BD4" alt=".NET" loading="lazy"></div>
-        <div class="tech-icon" title="PostgreSQL"><img src="https://cdn.simpleicons.org/postgresql/4169E1" alt="PostgreSQL" loading="lazy"></div>
-        <div class="tech-icon" title="Docker"><img src="https://cdn.simpleicons.org/docker/2496ED" alt="Docker" loading="lazy"></div>
-        <div class="tech-icon" title="TypeScript"><img src="https://cdn.simpleicons.org/typescript/3178C6" alt="TypeScript" loading="lazy"></div>
-      </div>
-    </section>
-
-    <!-- PROJECTS -->
-    <section id="projects" class="reveal">
-      <span class="section-label">Projects</span>
-      <div class="projects-carousel">
-        <div class="project-card">
-          <div class="project-card-image" style="background:linear-gradient(135deg,#f0f2f5,#e2e8f0)">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,0.12)" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
-          </div>
-          <div class="project-card-body">
-            <h2 class="project-card-title">Edu-Social Platform</h2>
-            <p class="project-card-desc">A comprehensive social platform for universities with AI-driven content moderation and real-time messaging.</p>
-            <a href="https://github.com/tam130103/datn" target="_blank" class="project-card-link">View Project <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
-          </div>
-        </div>
-        <div class="project-card">
-          <div class="project-card-image" style="background:linear-gradient(135deg,#f5f0f0,#ece0e0)">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,0.12)" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
-          </div>
-          <div class="project-card-body">
-            <h2 class="project-card-title">Food Delivery Ecosystem</h2>
-            <p class="project-card-desc">Full-stack e-commerce with Stripe payment integration and premium admin dashboard.</p>
-            <a href="https://github.com/tam130103/DACN" target="_blank" class="project-card-link">View Project <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+        <div class="exp-right" id="exp-right">
+          <div class="exp-card">
+            <div class="exp-card-header">
+              <div class="exp-card-company">ESG TECH</div>
+              <div class="exp-card-date">Nov 2025 - Apr 2026</div>
+            </div>
+            <div class="exp-card-role">Backend Developer Intern</div>
+            <ul class="exp-card-list">
+              <li>Developed and optimized Node.js/Express APIs with measurable reliability improvements</li>
+              <li>Built complex calculation engines for ESG metrics</li>
+              <li>Streamlined data flow between services</li>
+              <li>Contributed to code reviews and sprint planning</li>
+            </ul>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- EDUCATION -->
-    <section id="education" class="reveal">
-      <span class="section-label">Education</span>
-      <div class="experience-list">
-        <div class="experience-item" style="cursor:default">
-          <div class="experience-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><path d="M12 14l9-5-9-5-9 5 9 5z"/><path d="M12 14l6.16-3.422a12 12 0 01.665 6.479A11.95 11.95 0 0012 20.055a11.95 11.95 0 00-6.824-2.998 12 12 0 01.665-6.479L12 14z"/></svg>
+  <!-- TECH STACK MARQUEE -->
+  <section class="section section--marquee" id="techstack">
+    <div class="marquee-track" id="marquee-track">
+      <div class="marquee-content">
+        <span class="marquee-item"><img src="https://cdn.simpleicons.org/nodedotjs/339933" alt="Node.js" loading="lazy"> Node.js</span>
+        <span class="marquee-item"><img src="https://cdn.simpleicons.org/nestjs/E0234E" alt="NestJS" loading="lazy"> NestJS</span>
+        <span class="marquee-item"><img src="https://cdn.simpleicons.org/react/61DAFB" alt="React" loading="lazy"> React</span>
+        <span class="marquee-item"><img src="https://cdn.simpleicons.org/dotnet/512BD4" alt=".NET" loading="lazy"> .NET</span>
+        <span class="marquee-item"><img src="https://cdn.simpleicons.org/postgresql/4169E1" alt="PostgreSQL" loading="lazy"> PostgreSQL</span>
+        <span class="marquee-item"><img src="https://cdn.simpleicons.org/docker/2496ED" alt="Docker" loading="lazy"> Docker</span>
+        <span class="marquee-item"><img src="https://cdn.simpleicons.org/typescript/3178C6" alt="TypeScript" loading="lazy"> TypeScript</span>
+        <span class="marquee-divider">*</span>
+        <span class="marquee-item"><img src="https://cdn.simpleicons.org/nodedotjs/339933" alt="Node.js" loading="lazy"> Node.js</span>
+        <span class="marquee-item"><img src="https://cdn.simpleicons.org/nestjs/E0234E" alt="NestJS" loading="lazy"> NestJS</span>
+        <span class="marquee-item"><img src="https://cdn.simpleicons.org/react/61DAFB" alt="React" loading="lazy"> React</span>
+        <span class="marquee-item"><img src="https://cdn.simpleicons.org/dotnet/512BD4" alt=".NET" loading="lazy"> .NET</span>
+        <span class="marquee-item"><img src="https://cdn.simpleicons.org/postgresql/4169E1" alt="PostgreSQL" loading="lazy"> PostgreSQL</span>
+        <span class="marquee-item"><img src="https://cdn.simpleicons.org/docker/2496ED" alt="Docker" loading="lazy"> Docker</span>
+        <span class="marquee-item"><img src="https://cdn.simpleicons.org/typescript/3178C6" alt="TypeScript" loading="lazy"> TypeScript</span>
+        <span class="marquee-divider">*</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS (DESIRE) — Image Scale on Scroll -->
+  <section class="section section--projects" id="projects">
+    <div class="section-inner">
+      <h2 class="section-heading">Selected Work</h2>
+      <div class="projects-stack" id="projects-stack">
+        <a href="https://github.com/tam130103/datn" target="_blank" class="project-item" id="project-1">
+          <div class="project-img-wrap">
+            <img src="https://picsum.photos/seed/edu-social/1200/700" alt="Edu-Social Platform" class="project-img" loading="lazy">
           </div>
-          <div class="experience-info">
-            <h2 class="experience-company">Hanoi University of Mining and Geology</h2>
-            <p class="experience-role">Bachelor in Information Technology</p>
+          <div class="project-info">
+            <h3 class="project-title">Edu-Social Platform</h3>
+            <p class="project-desc">A comprehensive social platform for universities with AI-driven content moderation and real-time messaging.</p>
+            <span class="project-link-text">View Project
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+            </span>
           </div>
-          <div class="experience-date">2021 - 2026</div>
+        </a>
+        <a href="https://github.com/tam130103/DACN" target="_blank" class="project-item" id="project-2">
+          <div class="project-img-wrap">
+            <img src="https://picsum.photos/seed/food-delivery/1200/700" alt="Food Delivery Ecosystem" class="project-img" loading="lazy">
+          </div>
+          <div class="project-info">
+            <h3 class="project-title">Food Delivery Ecosystem</h3>
+            <p class="project-desc">Full-stack e-commerce with Stripe payment integration and premium admin dashboard.</p>
+            <span class="project-link-text">View Project
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+            </span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section class="section section--education" id="education">
+    <div class="section-inner">
+      <h2 class="section-heading">Education</h2>
+      <div class="edu-card">
+        <div class="edu-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28"><path d="M12 14l9-5-9-5-9 5 9 5z"/><path d="M12 14l6.16-3.422a12 12 0 01.665 6.479A11.95 11.95 0 0012 20.055a11.95 11.95 0 00-6.824-2.998 12 12 0 01.665-6.479L12 14z"/></svg>
         </div>
+        <div class="edu-info">
+          <h3 class="edu-school">Hanoi University of Mining and Geology</h3>
+          <p class="edu-degree">Bachelor in Information Technology</p>
+        </div>
+        <div class="edu-date">2021 - 2026</div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- LINKS -->
-    <section id="links" class="reveal">
-      <span class="section-label">Connect</span>
-      <div class="links-grid">
-        <a href="https://github.com/tam130103" target="_blank" class="link-item">GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
-        <a href="https://www.linkedin.com/in/nguyenthetam/" target="_blank" class="link-item">LinkedIn <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
-        <a href="https://datn-mu-six.vercel.app/" target="_blank" class="link-item">Live Demo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact" class="reveal">
-      <span class="section-label">Contact Me</span>
+  <!-- CONTACT (ACTION) -->
+  <section class="section section--contact" id="contact">
+    <div class="section-inner section-inner--narrow">
+      <h2 class="contact-heading">Let's build something remarkable together.</h2>
+      <p class="contact-sub">Have a project in mind? I'm currently available for freelance work and exciting collaborations.</p>
       <form class="contact-form" id="contact-form">
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input type="text" id="name" class="form-input" placeholder="Your Name" required autocomplete="name">
-        </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" class="form-input" placeholder="your@email.com" required autocomplete="email">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" class="form-input" placeholder="Your Name" required autocomplete="name">
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" class="form-input" placeholder="your@email.com" required autocomplete="email">
+          </div>
         </div>
         <div class="form-group">
           <label for="message">Message</label>
-          <textarea id="message" class="form-textarea" placeholder="How can I help you?" required></textarea>
+          <textarea id="message" class="form-textarea" placeholder="Tell me about your project..." required></textarea>
         </div>
-        <button type="submit" class="btn-submit">Send Message</button>
+        <button type="submit" class="btn-submit" id="btn-submit">Send Message</button>
       </form>
-    </section>
+      <div class="contact-links">
+        <a href="https://github.com/tam130103" target="_blank" class="contact-link-item">GitHub
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/nguyenthetam/" target="_blank" class="contact-link-item">LinkedIn
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </a>
+        <a href="mailto:thetam2103@gmail.com" class="contact-link-item">thetam2103@gmail.com
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </a>
+        <a href="https://datn-mu-six.vercel.app/" target="_blank" class="contact-link-item">Live Demo
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
 
-  </main>
-</div>
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <span class="footer-copy">&copy; 2026 Nguyen The Tam</span>
+      <span class="footer-tagline">Crafted with precision.</span>
+    </div>
+  </footer>
 
-<footer class="footer">
-  <div class="footer-content">
-    <span>&copy; 2026 Nguyen The Tam. Senior Full-stack Developer.</span>
-    <span>Crafted with precision.</span>
-  </div>
-</footer>
+</main>
 
 <script src="script.js" type="module"></script>
 </body>
