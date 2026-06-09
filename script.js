@@ -1,304 +1,325 @@
-/* ================================================================
-   PORTFOLIO — GSAP ANIMATIONS & INTERACTIONS
-   ================================================================ */
+document.addEventListener("DOMContentLoaded", () => {
+  initMobileNav();
+  initNavScroll();
+  initSignalCarousel();
+  initContactForm();
 
-document.addEventListener('DOMContentLoaded', () => {
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduceMotion) return;
+
   waitForGSAP(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    // Small delay to let browser settle after load
     requestAnimationFrame(() => {
-      initNavScroll();
       initHeroAnimations();
       initAboutTextReveal();
       initBentoReveal();
-      initExperienceReveal();
-      initProjectsScaleScroll();
+      initPinnedExperience();
+      initProjectScroll();
       initSectionReveals();
-      initContactForm();
-
-      // Force ScrollTrigger to recalculate after all animations are set
       ScrollTrigger.refresh();
     });
   });
 });
 
-/* --- Wait for GSAP to load (deferred) --- */
-function waitForGSAP(cb) {
-  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-    cb();
-  } else {
-    setTimeout(() => waitForGSAP(cb), 50);
+function waitForGSAP(callback) {
+  if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
+    callback();
+    return;
+  }
+
+  window.setTimeout(() => waitForGSAP(callback), 50);
+}
+
+function initMobileNav() {
+  const nav = document.getElementById("nav");
+  const button = document.getElementById("nav-menu-btn");
+  const links = document.querySelectorAll(".nav-link");
+
+  if (!nav || !button) return;
+
+  button.addEventListener("click", () => {
+    const isOpen = nav.classList.toggle("is-open");
+    button.setAttribute("aria-expanded", String(isOpen));
+    button.setAttribute("aria-label", isOpen ? "Close navigation" : "Open navigation");
+  });
+
+  links.forEach((link) => {
+    link.addEventListener("click", () => {
+      nav.classList.remove("is-open");
+      button.setAttribute("aria-expanded", "false");
+      button.setAttribute("aria-label", "Open navigation");
+    });
+  });
+}
+
+function initNavScroll() {
+  const nav = document.getElementById("nav");
+  if (!nav) return;
+
+  const update = () => {
+    nav.classList.toggle("scrolled", window.scrollY > 48);
+  };
+
+  update();
+  window.addEventListener("scroll", update, { passive: true });
+}
+
+function initHeroAnimations() {
+  const timeline = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+  timeline
+    .from(".nav-inner", { y: -24, opacity: 0, duration: 0.8 })
+    .from(".hero-kicker", { y: 22, opacity: 0, duration: 0.65 }, "-=0.35")
+    .from(".hero-title", { y: 34, opacity: 0, duration: 0.95 }, "-=0.3")
+    .from(".hero-subtitle", { y: 24, opacity: 0, duration: 0.7 }, "-=0.55")
+    .from(".hero-actions", { y: 20, opacity: 0, duration: 0.65 }, "-=0.45")
+    .from(".portrait-frame", { x: 48, y: 26, opacity: 0, scale: 0.94, duration: 1.05 }, "-=0.85")
+    .from(".system-note", { y: 18, opacity: 0, duration: 0.7, stagger: 0.12 }, "-=0.35");
+}
+
+function initAboutTextReveal() {
+  const container = document.getElementById("about-text-reveal");
+  const paragraph = container?.querySelector(".about-reveal-text");
+  if (!container || !paragraph) return;
+
+  const words = paragraph.textContent.trim().split(/\s+/);
+  paragraph.innerHTML = words.map((word) => `<span class="word">${escapeHtml(word)}</span>`).join(" ");
+
+  const wordEls = paragraph.querySelectorAll(".word");
+
+  ScrollTrigger.create({
+    trigger: container,
+    start: "top 72%",
+    end: "bottom 32%",
+    scrub: 0.45,
+    onUpdate: (self) => {
+      wordEls.forEach((word, index) => {
+        const start = index / wordEls.length;
+        const localProgress = Math.max(0, self.progress - start);
+        word.style.opacity = String(Math.min(1, 0.14 + localProgress * 10));
+      });
+    },
+  });
+}
+
+function initBentoReveal() {
+  const cards = document.querySelectorAll(".bento-card");
+  const lanes = document.querySelectorAll(".lane");
+
+  if (cards.length) {
+    gsap.set(cards, { y: 42, opacity: 0 });
+    gsap.to(cards, {
+      y: 0,
+      opacity: 1,
+      duration: 0.8,
+      stagger: 0.1,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: "#bento-grid",
+        start: "top 82%",
+        toggleActions: "play none none none",
+      },
+    });
+  }
+
+  if (lanes.length) {
+    gsap.from(lanes, {
+      y: 42,
+      opacity: 0,
+      duration: 0.8,
+      stagger: 0.08,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: ".lanes",
+        start: "top 84%",
+        toggleActions: "play none none none",
+      },
+    });
   }
 }
 
-/* ================================================================
-   NAV — Glass blur on scroll
-   ================================================================ */
-function initNavScroll() {
-  const nav = document.getElementById('nav');
-  if (!nav) return;
+function initPinnedExperience() {
+  const split = document.getElementById("exp-split");
+  const left = document.getElementById("exp-left");
+  const cards = document.querySelectorAll(".exp-card");
+  const canPin = window.matchMedia("(min-width: 1121px)").matches;
 
-  ScrollTrigger.create({
-    start: 'top -80',
-    onUpdate: (self) => {
-      if (self.scroll() > 80) {
-        nav.classList.add('scrolled');
-      } else {
-        nav.classList.remove('scrolled');
-      }
-    }
-  });
-}
+  if (!split || !left || !cards.length) return;
 
-/* ================================================================
-   HERO — Staggered entry
-   ================================================================ */
-function initHeroAnimations() {
-  const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-
-  tl.from('.hero-greeting', {
-    y: 30, opacity: 0, duration: 0.8, delay: 0.2
-  })
-  .from('.hero-h1', {
-    y: 40, opacity: 0, duration: 1
-  }, '-=0.5')
-  .from('.hero-sub', {
-    y: 30, opacity: 0, duration: 0.8
-  }, '-=0.6')
-  .from('.hero-ctas', {
-    y: 20, opacity: 0, duration: 0.7
-  }, '-=0.5')
-  .from('.hero-status', {
-    y: 15, opacity: 0, duration: 0.6
-  }, '-=0.4')
-  .from('.hero-image-wrap', {
-    scale: 0.85, opacity: 0, duration: 1.2, ease: 'power2.out'
-  }, '-=1.0');
-}
-
-/* ================================================================
-   ABOUT — Scrubbing Text Reveal
-   ================================================================ */
-function initAboutTextReveal() {
-  const container = document.getElementById('about-text-reveal');
-  if (!container) return;
-
-  const paragraph = container.querySelector('.about-reveal-p');
-  if (!paragraph) return;
-
-  // Split text into individual words wrapped in spans
-  const text = paragraph.textContent.trim();
-  const words = text.split(/\s+/);
-  paragraph.innerHTML = words.map(w => `<span class="word">${w}</span>`).join(' ');
-
-  const wordEls = paragraph.querySelectorAll('.word');
-
-  // ScrollTrigger scrubs through word opacities
-  ScrollTrigger.create({
-    trigger: container,
-    start: 'top 75%',
-    end: 'bottom 30%',
-    scrub: 0.5,
-    onUpdate: (self) => {
-      const progress = self.progress;
-      wordEls.forEach((word, i) => {
-        const wordProgress = i / wordEls.length;
-        const diff = progress - wordProgress;
-        if (diff > 0) {
-          const opacity = Math.min(1, 0.12 + diff * 8);
-          word.style.opacity = opacity;
-        } else {
-          word.style.opacity = 0.12;
-        }
-      });
-    }
-  });
-}
-
-/* ================================================================
-   BENTO GRID — Staggered reveal
-   Uses set() for initial state + to() with ScrollTrigger
-   ================================================================ */
-function initBentoReveal() {
-  const cards = document.querySelectorAll('.bento-card');
-  if (!cards.length) return;
-
-  // Set initial state explicitly
-  gsap.set(cards, { y: 50, opacity: 0 });
-
-  gsap.to(cards, {
-    scrollTrigger: {
-      trigger: '#bento-grid',
-      start: 'top 85%',
-      toggleActions: 'play none none none',
-    },
-    y: 0,
-    opacity: 1,
-    duration: 0.8,
-    stagger: 0.12,
-    ease: 'power3.out'
-  });
-}
-
-/* ================================================================
-   EXPERIENCE — Reveal
-   ================================================================ */
-function initExperienceReveal() {
-  const left = document.getElementById('exp-left');
-  const right = document.getElementById('exp-right');
-  if (!left || !right) return;
-
-  // Set initial states
-  gsap.set(left, { x: -40, opacity: 0 });
-  gsap.set(right.children, { y: 40, opacity: 0 });
-
-  gsap.to(left, {
-    scrollTrigger: {
-      trigger: '#exp-split',
-      start: 'top 80%',
-      toggleActions: 'play none none none',
-    },
-    x: 0,
-    opacity: 1,
-    duration: 0.9,
-    ease: 'power3.out'
-  });
-
-  gsap.to(right.children, {
-    scrollTrigger: {
-      trigger: '#exp-split',
-      start: 'top 75%',
-      toggleActions: 'play none none none',
-    },
-    y: 0,
-    opacity: 1,
-    duration: 0.8,
-    stagger: 0.15,
-    ease: 'power3.out'
-  });
-}
-
-/* ================================================================
-   PROJECTS — Image Scale & Fade on Scroll
-   ================================================================ */
-function initProjectsScaleScroll() {
-  const items = document.querySelectorAll('.project-item');
-  if (!items.length) return;
-
-  items.forEach((item) => {
-    // Scale up from 0.88 to 1.0
-    gsap.fromTo(item, {
-      scale: 0.88,
-      opacity: 0.3
-    }, {
-      scale: 1,
-      opacity: 1,
-      duration: 1,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: item,
-        start: 'top 90%',
-        end: 'top 45%',
-        scrub: 0.6,
-      }
+  if (canPin) {
+    ScrollTrigger.create({
+      trigger: split,
+      start: "top 18%",
+      end: "bottom 72%",
+      pin: left,
+      pinSpacing: false,
     });
+  }
 
-    // Fade out on exit
-    gsap.to(item, {
-      opacity: 0.15,
-      scale: 0.96,
-      scrollTrigger: {
-        trigger: item,
-        start: 'bottom 25%',
-        end: 'bottom -15%',
-        scrub: 0.6,
-      }
-    });
+  gsap.from(cards, {
+    y: 54,
+    opacity: 0,
+    duration: 0.8,
+    stagger: 0.16,
+    ease: "power3.out",
+    scrollTrigger: {
+      trigger: split,
+      start: "top 72%",
+      toggleActions: "play none none none",
+    },
   });
 }
 
-/* ================================================================
-   GENERIC SECTION REVEALS
-   ================================================================ */
+function initProjectScroll() {
+  const projects = document.querySelectorAll(".project-item");
+  if (!projects.length) return;
+
+  projects.forEach((project) => {
+    gsap.fromTo(
+      project,
+      { scale: 0.94, opacity: 0.45 },
+      {
+        scale: 1,
+        opacity: 1,
+        ease: "none",
+        scrollTrigger: {
+          trigger: project,
+          start: "top 92%",
+          end: "top 48%",
+          scrub: 0.55,
+        },
+      }
+    );
+  });
+}
+
 function initSectionReveals() {
-  const revealTargets = [
-    '.section--skills .section-heading',
-    '.section--experience .section-heading',
-    '.section--projects .section-heading',
-    '.section--education .section-heading',
-    '.edu-card',
-    '.contact-heading',
-    '.contact-sub',
-    '.contact-form',
-    '.contact-links'
+  const selectors = [
+    ".section-header",
+    ".section-statement",
+    ".exp-left",
+    ".signal-copy",
+    ".signal-carousel",
+    ".education-card",
+    ".contact-copy",
+    ".contact-form",
   ];
 
-  revealTargets.forEach(selector => {
-    const el = document.querySelector(selector);
-    if (!el) return;
-
-    gsap.set(el, { y: 35, opacity: 0 });
-
-    gsap.to(el, {
-      scrollTrigger: {
-        trigger: el,
-        start: 'top 88%',
-        toggleActions: 'play none none none',
-      },
-      y: 0,
-      opacity: 1,
-      duration: 0.9,
-      ease: 'power3.out'
+  selectors.forEach((selector) => {
+    document.querySelectorAll(selector).forEach((element) => {
+      gsap.from(element, {
+        y: 34,
+        opacity: 0,
+        duration: 0.75,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: element,
+          start: "top 86%",
+          toggleActions: "play none none none",
+        },
+      });
     });
   });
 }
 
-/* ================================================================
-   CONTACT FORM — Mailto handler
-   ================================================================ */
+function initSignalCarousel() {
+  const carousel = document.getElementById("signal-carousel");
+  const cards = Array.from(carousel?.querySelectorAll(".signal-card") || []);
+  const prev = document.getElementById("signal-prev");
+  const next = document.getElementById("signal-next");
+  let index = cards.findIndex((card) => card.classList.contains("is-active"));
+
+  if (!carousel || !cards.length || !prev || !next) return;
+  if (index < 0) index = 0;
+
+  const show = (nextIndex) => {
+    if (nextIndex === index) return;
+
+    const current = cards[index];
+    const incoming = cards[nextIndex];
+    const animate = typeof gsap !== "undefined" && !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (animate) {
+      gsap.to(current, {
+        opacity: 0,
+        y: 10,
+        duration: 0.18,
+        onComplete: () => {
+          current.classList.remove("is-active");
+          current.style.opacity = "";
+          current.style.transform = "";
+          incoming.classList.add("is-active");
+          gsap.fromTo(incoming, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.28, ease: "power2.out" });
+        },
+      });
+    } else {
+      current.classList.remove("is-active");
+      incoming.classList.add("is-active");
+    }
+
+    index = nextIndex;
+  };
+
+  prev.addEventListener("click", () => show((index - 1 + cards.length) % cards.length));
+  next.addEventListener("click", () => show((index + 1) % cards.length));
+}
+
 function initContactForm() {
-  const form = document.getElementById('contact-form');
+  const form = document.getElementById("contact-form");
   if (!form) return;
 
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
 
-    const submitBtn = form.querySelector('.btn-submit');
-    const name = document.getElementById('name').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const message = document.getElementById('message').value.trim();
+    const submitBtn = form.querySelector(".btn-submit");
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const message = document.getElementById("message").value.trim();
 
     if (!name || !email || !message) {
-      showBtnFeedback(submitBtn, 'Please fill all fields');
+      showButtonFeedback(submitBtn, "Complete all fields");
       return;
     }
 
-    if (!email.includes('@') || !email.includes('.')) {
-      showBtnFeedback(submitBtn, 'Invalid email');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showButtonFeedback(submitBtn, "Check email");
       return;
     }
 
+    const subject = encodeURIComponent(`Portfolio contact: ${name}`);
+    const body = encodeURIComponent(`From: ${name}\nEmail: ${email}\n\n${message}`);
     const originalText = submitBtn.textContent;
-    submitBtn.textContent = 'Sending...';
+
+    submitBtn.textContent = "Opening email...";
     submitBtn.disabled = true;
+    window.location.href = `mailto:thetam2103@gmail.com?subject=${subject}&body=${body}`;
 
-    window.location.href = `mailto:thetam2103@gmail.com?subject=${encodeURIComponent('Portfolio Contact: ' + name)}&body=${encodeURIComponent('From: ' + name + '\nEmail: ' + email + '\n\n' + message)}`;
-
-    submitBtn.textContent = 'Sent!';
-    setTimeout(() => {
+    window.setTimeout(() => {
       submitBtn.textContent = originalText;
       submitBtn.disabled = false;
-    }, 3000);
+    }, 2200);
   });
 }
 
-function showBtnFeedback(btn, msg) {
-  const original = btn.textContent;
-  btn.textContent = msg;
-  btn.disabled = true;
-  setTimeout(() => {
-    btn.textContent = original;
-    btn.disabled = false;
-  }, 2000);
+function showButtonFeedback(button, message) {
+  if (!button) return;
+
+  const originalText = button.textContent;
+  button.textContent = message;
+  button.disabled = true;
+
+  window.setTimeout(() => {
+    button.textContent = originalText;
+    button.disabled = false;
+  }, 1800);
+}
+
+function escapeHtml(value) {
+  return value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 }
