@@ -1,3 +1,8 @@
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
 document.addEventListener("DOMContentLoaded", () => {
   initMobileNav();
   initNavScroll();
@@ -7,29 +12,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (reduceMotion) return;
 
-  waitForGSAP(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    requestAnimationFrame(() => {
-      initHeroAnimations();
-      initAboutTextReveal();
-      initBentoReveal();
-      initPinnedExperience();
-      initProjectScroll();
-      initSectionReveals();
-      ScrollTrigger.refresh();
-    });
+  requestAnimationFrame(() => {
+    initHeroAnimations();
+    initAboutTextReveal();
+    initBentoReveal();
+    initPinnedExperience();
+    initProjectScroll();
+    initSectionReveals();
+    ScrollTrigger.refresh();
   });
 });
-
-function waitForGSAP(callback) {
-  if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
-    callback();
-    return;
-  }
-
-  window.setTimeout(() => waitForGSAP(callback), 50);
-}
 
 function initMobileNav() {
   const nav = document.getElementById("nav");
